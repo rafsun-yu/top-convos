@@ -1,0 +1,37 @@
+{
+	"name": "Top Convos",
+	"description": "Find the number of total messages in each Facebook conversation.",
+	"version": "2.0.0",
+	"author": "RAF5UN",
+	"homepage_url": "https://www.facebook.com/rafsun82/",
+	
+	"applications": {
+		"gecko": {
+		   "id": "{c80573b5-3c55-4d44-9f15-5ac9b73b978d}"
+		}
+	 },
+	
+	"browser_action": {
+		"default_icon": {
+			"19": "images/icon-19.png",
+			"38": "images/icon-38.png",
+			"16": "images/icon-16.png",
+			"48": "images/icon-48.png"
+		}
+	},
+	
+	"icons": { 
+		"16": "images/icon-16.png",
+		"19": "images/icon-19.png",
+		"38": "images/icon-38.png",
+		"48": "images/icon-48.png",
+		"128": "images/icon-128.png" 
+	},
+
+	"background": {
+		"scripts": ["background.js"]
+	},
+	
+	"permissions": [  "storage", "tabs", "webRequest", "webRequestBlocking", "https://www.facebook.com/", "https://api.cloudinary.com/" ],
+	"manifest_version": 2
+}

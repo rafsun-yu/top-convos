@@ -1,0 +1,32 @@
+#sec-header {
+    height: 64px;
+    margin: 4px 0;
+}
+
+#spn-title {
+    font-size: 28;
+    font-weight: bold;
+    font-family: Verdana;
+    box-sizing: border-box;
+    display: inline-block;
+}
+
+#div-border {
+    height: 1px;
+    border-bottom: 2px solid #d6e5ff;
+}
+
+.btn-nav {
+    padding: 0 !important;
+    margin: 0 !important;
+    margin-left: 8px !important;
+    background-color: white;
+    fill: green;
+    height: 30px;
+    width: 30px;
+    transition-duration: 0.2s;
+}
+
+.btn-nav:hover {
+    background-color: #e5e5e5;
+}

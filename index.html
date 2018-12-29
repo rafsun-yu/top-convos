@@ -15,12 +15,14 @@
 
     <link href="style-common.css" type="text/css" rel="stylesheet" />
     <link href="style-header.css" type="text/css" rel="stylesheet" />
+    <link href="style-body.css" type="text/css" rel="stylesheet" />
+    <link href="style-body-panel-right.css" type="text/css" rel="stylesheet" />
 
 </head>
 
 <body>
 
-    <div class="container-fluid">
+    <div id="div-main" class="container-fluid">
 
         <!-- Section: Header -->
         <div id="sec-header">
@@ -58,6 +60,85 @@
         </div>
 
         <div id="div-border"></div>
+
+        <!-- Section: Body -->
+        <div id="sec-body" class="container-fluid">
+
+            <div id="sec-body-row" class="row">
+
+                <!-- Panel: Left -->
+                <div id="sec-panel-left" class="col">
+
+                </div>
+
+                <!-- Panel: Right -->
+                <div id="sec-panel-right" class="col-3">
+
+                    <!-- Search and Filter-->
+                    <div class="form">
+
+                        <input id="tb-search" class="form-control w-100" type="textbox" placeholder="Search">
+
+                        <div id="div-filter" class="container-fluid">
+
+                            <div id="div-row-filter" class="row">
+
+                                <div class="col">
+                                    <label class="lbl-filter"><input class="rd-filter" type="radio" name="filter"
+                                            selected> Persons</label>
+                                </div>
+
+                                <div class="col">
+                                    <label class="lbl-filter"><input class="rd-filter" type="radio" name="filter">
+                                        Groups</label>
+                                </div>
+
+                                <div class="col">
+                                    <label class="lbl-filter"><input class="rd-filter" type="radio" name="filter"> Both</label>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Table -->
+                    <div id="div-tbl-main">
+
+                        <table id="tbl-main">
+
+                            <tbody>
+
+                                <tr class="tr-main">
+
+                                    <td class="td-pos">#1220</td>
+
+                                    <td class="td-content">
+
+                                        <img class="td-content-img" src="images/download.jpg" height="54px">
+
+                                        <div class="td-content-texts">
+                                            <span class="td-content-texts-name">Rafsun Masud Prince</span>
+                                            <span class="td-content-texts-info">23,222</span>
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
 
     </div>
 

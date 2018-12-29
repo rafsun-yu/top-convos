@@ -1,0 +1,13 @@
+#sec-body {
+    overflow-y: hidden;
+    height: 100%;
+}
+
+#sec-body-row {
+    height: 100%;
+}
+
+#sec-panel-left {
+    height: 100%;
+    width: 75%;
+}

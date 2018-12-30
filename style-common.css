@@ -35,3 +35,18 @@ body {
      flex-direction: column;
      align-items: stretch;
  }
+
+.color-gold {
+     border-color: #FFDF00;
+     color: #FFDF00;
+}
+
+.color-silver {
+    border-color: #808080;
+    color: #808080;
+}
+
+.color-bronze {
+    border-color: #cd7f32;
+    color: #cd7f32;
+}

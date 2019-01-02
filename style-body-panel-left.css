@@ -30,6 +30,14 @@
     width: 75%;
     max-width: 100%;
     margin: 12px auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#div-results-row {
+    width: 780px;
 }
 
 .col-result {
@@ -41,6 +49,7 @@
 }
 
 .col-result-img {
+    width: 225px;
     border: 2px solid;
     border-radius: 50%;
 }
@@ -66,7 +75,7 @@
 
 }
 
-#div-btn-share {
+.div-btn-share {
 
     background-color: #4267B2;
     border: none;
@@ -82,13 +91,17 @@
     transition-duration: 0.2s;
 }
 
-#div-btn-share:hover {
+.div-btn-share:hover {
 
     background-color: #3b5b9b;
 
 }
 
-#div-btn-share.disabled {
+.div-btn-share.disabled {
     background-color: #677faf;
     cursor: default;
+}
+
+.div-btn-share#div-btn-share-mobile {
+    display: none;
 }

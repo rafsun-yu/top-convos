@@ -6,6 +6,8 @@
     flex-direction: column;
     
     border-left: 1px solid #d6e5ff;
+
+    min-width: 350px;
 }
 
 /** Search and Filter */
@@ -84,3 +86,4 @@
     font-size: 14px;
     height: 100%;
 }
+

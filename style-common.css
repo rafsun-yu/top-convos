@@ -12,6 +12,8 @@ body {
     white-space: nowrap;
 
     height: 100%;
+    min-width: 1280px;
+    background-color: white;
 }
 
 .brdr {

@@ -1,0 +1,27 @@
+0. init (main.js)
+
+        * Contains final.json
+
+1. Load json objects (loader.js)
+
+        1. Load data from facebook
+
+                1. [D] Fetch fb_dtsg and c_user
+
+                2. Get raw_json_data (raw.json)
+
+        2. Make final_json_data from raw_json_data (final.json)
+
+
+2. [D] Update Interface (ui.js)
+
+        1. [D] Update Interface from final_json_data
+
+
+3. Cloudinary (cloudinary.js)
+
+        1. Create canvas from final_json_data
+
+        2. Upload canvas in Cloudinary
+
+        3. Prompt a share dialog

@@ -1,12 +1,13 @@
 (async function () {
 
+    // Inits log.
     log.setOnConsole(true);
     log.init();
 
-     let objFinal = null; // final.json
-
-    objFinal = await tcLoader.loadObjFinalFromLocal();
-    tcUi.updateUi(objFinal);
+    // JSON object containing 'fb_dtsg' and 'c_user' keys.
+    let authTokens;
+    // FINAL_JSON object. See final.json.
+    let objFinal = null; 
 
     tcLoader.getAuthTokens()
 

@@ -4,11 +4,11 @@
 
 1. Load json objects (loader.js)
 
-        1. Load data from facebook
+        1. [D] Load data from facebook
 
                 1. [D] Fetch fb_dtsg and c_user
 
-                2. Get raw_json_data (raw.json)
+                2. [D] Get raw_json_data (raw.json)
 
         2. Make final_json_data from raw_json_data (final.json)
 

@@ -2,6 +2,7 @@ var tcUi = (function () {
 
     /** Updates Left and Right panel */
     function updateUi(objFinal) {
+        objFinal = sortFinalData(objFinal);
         updatePanelRight(objFinal);
         updatePanelLeft(objFinal);
     }
@@ -121,9 +122,39 @@ var tcUi = (function () {
         return $tr;
 
     }
+
+    function sortFinalData(finalData) {
+
+        let isSwapped = true;
+
+        while (isSwapped) {
+
+            isSwapped = false;
+            for(i = 0; i < finalData.length-1; i++) {
+
+                if (finalData[i].count < finalData[i+1].count) {
+    
+                    let temp = finalData[i+1];
+                    finalData[i+1] = finalData[i];
+                    finalData[i] = temp;
+                    isSwapped = true;
+                }
+    
+                finalData[i].pos = i+1;
+                finalData[i+1].pos = i+2;
+    
+            }
+
+        }
+
+        return finalData;
+
+    }
     
     return {
-        updateUi: updateUi
+        updateUi: updateUi,
+
+        sortFinalData: sortFinalData
     }
 
 })();

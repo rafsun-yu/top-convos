@@ -1,6 +1,10 @@
+// The first object is valid
+
 [
     {
         "pos": 1,
+        "fbid": 10023,
+        "is_user": true,
         "full_name": "Rafsun Masud Prince",
         "short_name": "Rafsun",
         "image_url": "",

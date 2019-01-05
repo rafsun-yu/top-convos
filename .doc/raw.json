@@ -1,0 +1,463 @@
+Thread nodes array: object > o0 > data > viewer > message_threads > nodes
+
+GROUPS:
+    fbid: thread_key.thread_fbid,
+    is_user: false,
+    full_name: name,
+    short_name: name,
+    image_url: image.uri,
+    count: messages_count,
+    count_str: [edits on count]
+
+USERS\PAGES:
+    fbid: thread_key.other_user_id,
+    is_user: true,
+    full_name: all_participants.nodes[whoose messaging_actor.id == fbid].messaging_actor.name,
+    short_name: all_participants.nodes[whoose messaging_actor.id == fbid].messaging_actor.short_name,
+    image_url: all_participants.nodes[whoose messaging_actor.id == fbid].messaging_actor.big_image_src.uri,
+    count: messages_count,
+    count_str: [edits on count]
+
+TIPS:
+    Find is_user:
+        If (thread_key.thread_fbid == null) then is_user = true; else false;
+
+Thread node structure: 
+
+[PAGE]
+{
+    "thread_key": {
+        "thread_fbid": null,
+        "other_user_id": "1863030913997916"
+    },
+    "name": null,
+    "last_message": {
+        "nodes": [
+            {
+                "snippet": "debug",
+                "message_sender": {
+                    "messaging_actor": {
+                        "id": "100010086031027"
+                    }
+                },
+                "timestamp_precise": "1546697075669",
+                "commerce_message_type": null,
+                "extensible_attachment": null,
+                "sticker": null,
+                "blob_attachments": []
+            }
+        ]
+    },
+    "unread_count": 0,
+    "messages_count": 3,
+    "image": null,
+    "updated_time_precise": "1546697075669",
+    "mute_until": null,
+    "is_pin_protected": false,
+    "is_viewer_subscribed": true,
+    "thread_queue_enabled": false,
+    "folder": "INBOX",
+    "has_viewer_archived": false,
+    "is_page_follow_up": false,
+    "cannot_reply_reason": null,
+    "ephemeral_ttl_mode": 0,
+    "customization_info": null,
+    "thread_admins": [],
+    "approval_mode": null,
+    "joinable_mode": {
+        "mode": "0",
+        "link": ""
+    },
+    "thread_queue_metadata": null,
+    "event_reminders": {
+        "nodes": []
+    },
+    "montage_thread": null,
+    "last_read_receipt": {
+        "nodes": [
+            {
+                "timestamp_precise": "1546697075669"
+            }
+        ]
+    },
+    "related_page_thread": null,
+    "rtc_call_data": {
+        "call_state": "NO_ONGOING_CALL",
+        "server_info_data": "",
+        "initiator": null
+    },
+    "associated_object": null,
+    "privacy_mode": 1,
+    "reactions_mute_mode": "REACTIONS_NOT_MUTED",
+    "mentions_mute_mode": "MENTIONS_NOT_MUTED",
+    "customization_enabled": false,
+    "thread_type": "ONE_TO_ONE",
+    "participant_add_mode_as_string": null,
+    "is_canonical_neo_user": false,
+    "participants_event_status": [],
+    "page_comm_item": null,
+    "all_participants": {
+        "nodes": [
+            {
+                "messaging_actor": {
+                    "id": "1863030913997916",
+                    "__typename": "Page",
+                    "name": "Call of Duty: Black Ops 4",
+                    "url": "https://www.facebook.com/BlackOps4Cod/",
+                    "big_image_src": {
+                        "uri": "https://scontent.fdac7-1.fna.fbcdn.net/v/t1.0-1/c20.0.80.80a/p80x80/37639536_1863031500664524_2659334137822838784_n.jpg?_nc_cat=100&_nc_ht=scontent.fdac7-1.fna&oh=315e936c029ac6bc24464589ae7653c3&oe=5C95B65D"
+                    },
+                    "username": "BlackOps4Cod",
+                    "accepts_messenger_user_feedback": true,
+                    "is_messenger_user": true,
+                    "is_verified": false,
+                    "is_messenger_platform_bot": true,
+                    "is_message_blocked_by_viewer": false
+                }
+            },
+            {
+                "messaging_actor": {
+                    "id": "100010086031027",
+                    "__typename": "User",
+                    "name": "John Price",
+                    "gender": "MALE",
+                    "url": "https://www.facebook.com/profile.php?id=100010086031027",
+                    "big_image_src": {
+                        "uri": "https://scontent.fdac7-1.fna.fbcdn.net/v/t1.0-1/p80x80/16938900_422187134794151_4809188271297913514_n.jpg?_nc_cat=105&_nc_ht=scontent.fdac7-1.fna&oh=27e27c0a08fa6e9c4c3bf0cde41c2276&oe=5C91C1A0"
+                    },
+                    "short_name": "John",
+                    "username": "",
+                    "is_viewer_friend": false,
+                    "is_messenger_user": true,
+                    "is_verified": false,
+                    "is_message_blocked_by_viewer": false,
+                    "is_viewer_coworker": false,
+                    "is_employee": null
+                }
+            }
+        ]
+    },
+    "read_receipts": {
+        "nodes": [
+            {
+                "watermark": "1546697075669",
+                "action": "1546697075669",
+                "actor": {
+                    "id": "100010086031027"
+                }
+            }
+        ]
+    },
+    "delivery_receipts": {
+        "nodes": [
+            {
+                "timestamp_precise": "1546697076190"
+            }
+        ]
+    }
+}
+
+[USER]
+{
+    "thread_key": {
+        "thread_fbid": null,
+        "other_user_id": "100025728362229"
+    },
+    "name": null,
+    "last_message": {
+        "nodes": [
+            {
+                "snippet": "debug",
+                "message_sender": {
+                    "messaging_actor": {
+                        "id": "100010086031027"
+                    }
+                },
+                "timestamp_precise": "1546697061611",
+                "commerce_message_type": null,
+                "extensible_attachment": null,
+                "sticker": null,
+                "blob_attachments": []
+            }
+        ]
+    },
+    "unread_count": 0,
+    "messages_count": 2,
+    "image": null,
+    "updated_time_precise": "1546697061611",
+    "mute_until": null,
+    "is_pin_protected": false,
+    "is_viewer_subscribed": true,
+    "thread_queue_enabled": false,
+    "folder": "INBOX",
+    "has_viewer_archived": false,
+    "is_page_follow_up": false,
+    "cannot_reply_reason": null,
+    "ephemeral_ttl_mode": 0,
+    "customization_info": null,
+    "thread_admins": [],
+    "approval_mode": null,
+    "joinable_mode": {
+        "mode": "0",
+        "link": ""
+    },
+    "thread_queue_metadata": null,
+    "event_reminders": {
+        "nodes": []
+    },
+    "montage_thread": null,
+    "last_read_receipt": {
+        "nodes": [
+            {
+                "timestamp_precise": "1546697061611"
+            }
+        ]
+    },
+    "related_page_thread": null,
+    "rtc_call_data": {
+        "call_state": "NO_ONGOING_CALL",
+        "server_info_data": "",
+        "initiator": null
+    },
+    "associated_object": null,
+    "privacy_mode": 1,
+    "reactions_mute_mode": "REACTIONS_NOT_MUTED",
+    "mentions_mute_mode": "MENTIONS_NOT_MUTED",
+    "customization_enabled": true,
+    "thread_type": "ONE_TO_ONE",
+    "participant_add_mode_as_string": null,
+    "is_canonical_neo_user": false,
+    "participants_event_status": [],
+    "page_comm_item": null,
+    "all_participants": {
+        "nodes": [
+            {
+                "messaging_actor": {
+                    "id": "100025728362229",
+                    "__typename": "User",
+                    "name": "Hasan Mridul",
+                    "gender": "MALE",
+                    "url": null,
+                    "big_image_src": {
+                        "uri": "https://scontent.fdac7-1.fna.fbcdn.net/v/t1.0-1/p80x80/33385738_131805201020425_9031066057292382208_n.jpg?_nc_cat=108&_nc_ht=scontent.fdac7-1.fna&oh=b0b5bbc7f2bec7461448b2c3f980b938&oe=5CCB2978"
+                    },
+                    "short_name": "Hasan",
+                    "username": "neebr67",
+                    "is_viewer_friend": true,
+                    "is_messenger_user": true,
+                    "is_verified": false,
+                    "is_message_blocked_by_viewer": false,
+                    "is_viewer_coworker": false,
+                    "is_employee": null
+                }
+            },
+            {
+                "messaging_actor": {
+                    "id": "100010086031027",
+                    "__typename": "User",
+                    "name": "John Price",
+                    "gender": "MALE",
+                    "url": "https://www.facebook.com/profile.php?id=100010086031027",
+                    "big_image_src": {
+                        "uri": "https://scontent.fdac7-1.fna.fbcdn.net/v/t1.0-1/p80x80/16938900_422187134794151_4809188271297913514_n.jpg?_nc_cat=105&_nc_ht=scontent.fdac7-1.fna&oh=27e27c0a08fa6e9c4c3bf0cde41c2276&oe=5C91C1A0"
+                    },
+                    "short_name": "John",
+                    "username": "",
+                    "is_viewer_friend": false,
+                    "is_messenger_user": true,
+                    "is_verified": false,
+                    "is_message_blocked_by_viewer": false,
+                    "is_viewer_coworker": false,
+                    "is_employee": null
+                }
+            }
+        ]
+    },
+    "read_receipts": {
+        "nodes": [
+            {
+                "watermark": "1546697061611",
+                "action": "1546697061611",
+                "actor": {
+                    "id": "100010086031027"
+                }
+            }
+        ]
+    },
+    "delivery_receipts": {
+        "nodes": []
+    }
+}
+
+[GROUP]           
+{
+    "thread_key": {
+        "thread_fbid": "2136902606372122",
+        "other_user_id": null
+    },
+    "name": "abcd",
+    "last_message": {
+        "nodes": [
+            {
+                "snippet": "oklol",
+                "message_sender": {
+                    "messaging_actor": {
+                        "id": "100010086031027"
+                    }
+                },
+                "timestamp_precise": "1546696990620",
+                "commerce_message_type": null,
+                "extensible_attachment": null,
+                "sticker": null,
+                "blob_attachments": []
+            }
+        ]
+    },
+    "unread_count": 0,
+    "messages_count": 11,
+    "image": {
+        "uri": "https://scontent.fdac7-1.fna.fbcdn.net/v/t1.15752-9/49696232_307700666529728_8416309602756329472_n.jpg?_nc_cat=108&_nc_ht=scontent.fdac7-1.fna&oh=c0c37dbe1752922984eb4e065b383ff8&oe=5C8DFE3C"
+    },
+    "updated_time_precise": "1546696990620",
+    "mute_until": null,
+    "is_pin_protected": false,
+    "is_viewer_subscribed": true,
+    "thread_queue_enabled": true,
+    "folder": "INBOX",
+    "has_viewer_archived": false,
+    "is_page_follow_up": false,
+    "cannot_reply_reason": null,
+    "ephemeral_ttl_mode": 0,
+    "customization_info": null,
+    "thread_admins": [
+        {
+            "id": "100010086031027"
+        }
+    ],
+    "approval_mode": 0,
+    "joinable_mode": {
+        "mode": "0",
+        "link": ""
+    },
+    "thread_queue_metadata": {
+        "approval_requests": {
+            "nodes": []
+        }
+    },
+    "event_reminders": {
+        "nodes": []
+    },
+    "montage_thread": null,
+    "last_read_receipt": {
+        "nodes": [
+            {
+                "timestamp_precise": "1546696990620"
+            }
+        ]
+    },
+    "related_page_thread": null,
+    "rtc_call_data": {
+        "call_state": "NO_ONGOING_CALL",
+        "server_info_data": "",
+        "initiator": null
+    },
+    "associated_object": null,
+    "privacy_mode": 1,
+    "reactions_mute_mode": "REACTIONS_NOT_MUTED",
+    "mentions_mute_mode": "MENTIONS_NOT_MUTED",
+    "customization_enabled": true,
+    "thread_type": "GROUP",
+    "participant_add_mode_as_string": "ADD",
+    "is_canonical_neo_user": false,
+    "participants_event_status": [],
+    "page_comm_item": null,
+    "all_participants": {
+        "nodes": [
+            {
+                "messaging_actor": {
+                    "id": "100009974196650",
+                    "__typename": "User",
+                    "name": "Hasan Mridul",
+                    "gender": "MALE",
+                    "url": "https://www.facebook.com/gbonasher",
+                    "big_image_src": {
+                        "uri": "https://scontent.fdac7-1.fna.fbcdn.net/v/t1.0-1/p80x80/22549905_541586026183866_7646731679074765590_n.jpg?_nc_cat=104&_nc_ht=scontent.fdac7-1.fna&oh=04322506e104725c7b95c32ad5986875&oe=5CCE9089"
+                    },
+                    "short_name": "Hasan",
+                    "username": "gbonasher",
+                    "is_viewer_friend": true,
+                    "is_messenger_user": true,
+                    "is_verified": false,
+                    "is_message_blocked_by_viewer": false,
+                    "is_viewer_coworker": false,
+                    "is_employee": null
+                }
+            },
+            {
+                "messaging_actor": {
+                    "id": "100010086031027",
+                    "__typename": "User",
+                    "name": "John Price",
+                    "gender": "MALE",
+                    "url": "https://www.facebook.com/profile.php?id=100010086031027",
+                    "big_image_src": {
+                        "uri": "https://scontent.fdac7-1.fna.fbcdn.net/v/t1.0-1/p80x80/16938900_422187134794151_4809188271297913514_n.jpg?_nc_cat=105&_nc_ht=scontent.fdac7-1.fna&oh=27e27c0a08fa6e9c4c3bf0cde41c2276&oe=5C91C1A0"
+                    },
+                    "short_name": "John",
+                    "username": "",
+                    "is_viewer_friend": false,
+                    "is_messenger_user": true,
+                    "is_verified": false,
+                    "is_message_blocked_by_viewer": false,
+                    "is_viewer_coworker": false,
+                    "is_employee": null
+                }
+            },
+            {
+                "messaging_actor": {
+                    "id": "100012214833676",
+                    "__typename": "User",
+                    "name": "Rafsun Masud Prince",
+                    "gender": "MALE",
+                    "url": "https://www.facebook.com/this.link.looks.weird.but.im.so.dying.to.change.it",
+                    "big_image_src": {
+                        "uri": "https://scontent.fdac7-1.fna.fbcdn.net/v/t1.0-1/c1.0.80.80a/p80x80/23795060_410278059389352_232616198387667613_n.jpg?_nc_cat=109&_nc_ht=scontent.fdac7-1.fna&oh=489f7092945a580ba3dd1f53a4a8ca5e&oe=5CC1459F"
+                    },
+                    "short_name": "Rafsun",
+                    "username": "this.link.looks.weird.but.im.so.dying.to.change.it",
+                    "is_viewer_friend": true,
+                    "is_messenger_user": true,
+                    "is_verified": false,
+                    "is_message_blocked_by_viewer": false,
+                    "is_viewer_coworker": false,
+                    "is_employee": null
+                }
+            }
+        ]
+    },
+    "read_receipts": {
+        "nodes": [
+            {
+                "watermark": "1546696990620",
+                "action": "1546696991520",
+                "actor": {
+                    "id": "100009974196650"
+                }
+            },
+            {
+                "watermark": "1546696990620",
+                "action": "1546696990620",
+                "actor": {
+                    "id": "100010086031027"
+                }
+            }
+        ]
+    },
+    "delivery_receipts": {
+        "nodes": [
+            {
+                "timestamp_precise": "1546696990620"
+            }
+        ]
+    }
+}

@@ -1,12 +1,14 @@
-// The first object is valid
+// The first and second object is valid
 
 [
     {
         "pos": 1,
         "fbid": 10023,
         "is_user": true,
-        "full_name": "Rafsun Masud Prince",
+        "name": "Rafsun Masud Prince",
         "short_name": "Rafsun",
+        "name_tag": "rafsun masud prince",
+        "users": ["Rafsun Masud Prince"],
         "image_url": "",
         "count": 22300,
         "count_str": "22,300"
@@ -14,11 +16,15 @@
 
     {
         "pos": 2,
-        "full_name": "Daiyan Chowdhury",
-        "short_name": "Daiyan",
+        "fbid": 10023,
+        "is_user": true,
+        "name": "Rafsun, Hasan & Arafat",
+        "short_name": null,
+        "name_tag": "rafsun masud prince hasan mridul nibir arafat hossen",
+        "users": ["Rafsun Masud Prince", "Hasan Mridul", "Arafat Hossen"],
         "image_url": "",
-        "count": 15300,
-        "count_str": "15,300"
+        "count": 22300,
+        "count_str": "22,300"
     },
 
     {

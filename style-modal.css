@@ -1,0 +1,24 @@
+#my-modal {
+    z-index: 99999;
+}
+
+.modal-body {
+
+    max-height: 420; 
+    overflow-y: auto;
+    overflow-x: hidden; 
+    white-space: normal;
+
+    margin: 16px !important;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.modal-body * {
+    
+    margin: auto;
+
+}

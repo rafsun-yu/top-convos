@@ -1,8 +1,11 @@
-0. init (main.js)
+0. [D] init (main.js)
 
-        * Contains final.json
+        * Contains finalData (final.json)
+        * When tab is first opened it fetches fb-dtsg and reloads threadlist
+          But if reload button is clicked it only reloads threadlist
+        * Must update version no in about.html. 
 
-1. Load json objects (loader.js)
+1. [D] Load json objects (loader.js)
 
         1. [D] Load data from facebook
 
@@ -10,7 +13,7 @@
 
                 2. [D] Get raw_json_data (raw.json)
 
-        2. Make final_json_data from raw_json_data (final.json)
+        2. [D] Make final_json_data from raw_json_data (final.json)
 
 
 2. [D] Update Interface (ui.js)
@@ -25,3 +28,15 @@
         2. Upload canvas in Cloudinary
 
         3. Prompt a share dialog
+
+IDEAS:
+        - Add cross button on searchbox
+        - [X] Fadeout on overflow, in left panel names.
+        - bigger group image not found image.
+        - popover shows all users of group
+        
+TASKS:
+        - [D] hide tbody before adding tr.
+        - [D] deleted users "UNTITLED" name disappears after searchbox clear.
+        - [D] modify polciy. addon doesnt use localstorage anymore.
+        - [D] Get users information.

@@ -18,45 +18,88 @@ var tcLoader = (function () {
 
         try {
 
-            return await new Promise(resolve => {
+            let html = null;
+            let attempts = 0;
+            let dateOld, dateNew;
+            dateOld = Date.now();
 
-                let xhr = new XMLHttpRequest();
-                let method = isPost ? "POST" : "GET";
-                xhr.open(method, url);
+            while (html == null) {
 
-		        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-                log.m("XHR", "URL", url);
-                
-                xhr.onreadystatechange = function () {
+                attempts++;
 
-                    if(xhr.readyState === 4) {
+                dateNew = Date.now();
 
-                        log.m("XHR", "StatusCode", xhr.status);
+                if (dateNew - dateOld >= (10 * 1000))
+                    return null;
 
-                        if(xhr.status === 200)
-                        {
-                            let responseString = xhr.responseText;
-                            resolve(responseString);
-                        }
-                        else {
-                            resolve(null);
+                html = await new Promise(resolve => {
+
+                    changeLoadingIconToWaiting(true);
+
+                    let loadedOld = 0;
+
+                    let xhr = new XMLHttpRequest();
+                    let method = isPost ? "POST" : "GET";
+                    xhr.open(method, url);
+                    xhr.setRequestHeader("User-Agent", "Mozilla/5.0 (Windows NT x.y; rv:10.0) Gecko/20100101 Firefox/10.0");
+
+                    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                    log.m("XHR", "URL", url);
+                    
+                    xhr.onreadystatechange = function () {
+
+                        if(xhr.readyState === 4) {
+
+                            log.m("XHR", "StatusCode", xhr.status);
+
+                            if(xhr.status === 200)
+                            {
+                                let responseString = xhr.responseText;
+                                resolve(responseString);
+                            }
+                            else {
+                                resolve(null);
+                            }
                         }
                     }
-                }
-    
-                xhr.ontimeout = function (err) {
-                    log.w("XHR", "TimeOut", err.message);
-                    resolve(null);
-                }
 
-                xhr.onerror = function (err) {
-                    log.w("XHR", err.message);
-                    resolve(null);
-                }
-    
-                xhr.send(postData);
-             });
+                    xhr.ontimeout = function (err) {
+                        log.w("XHR", "TimeOut", err.message);
+                        console.log("mara");
+                        resolve(null);
+                    }
 
+                    xhr.onerror = function (err) {
+                        log.w("XHR", err.message);
+                        resolve(null);
+                    }
+
+
+                    xhr.onprogress = function (e) {
+                        let loadedNew = e.loaded;
+
+                        if (loadedNew == loadedOld) {
+
+                            // No internet
+                            changeLoadingIconToWaiting(true);
+
+                        } else {
+
+                            changeLoadingIconToWaiting(false);
+
+                        }
+
+                        loadedOld = loadedNew;
+
+                    }
+
+                    xhr.send(postData);
+                    });
+    
+            }  
+
+            log.m("XHR", "ATTEMPTS", attempts);
+            return html;
         }
         catch (err) {
             log.e("XHR", err.message);
@@ -76,11 +119,11 @@ var tcLoader = (function () {
      * 
      * @requires loader.js -> http 
      * 
-     * @returns {*} JSON Object with keys: 'fb_dtsg' and 'c_user' or NULL on error.
+     * @returns {*} JSON Object with keys: 'fb_dtsg' and 'c_user' | NULL on error | -1 on internet fail
      */
     async function getAuthTokens() {
 
-        log.l("loader.js:getAuthTokens");
+        log.l("AuthTokens");
 
         try {
 
@@ -88,14 +131,19 @@ var tcLoader = (function () {
             parser = new DOMParser();
     
             // Gets html string of the whole page
+            //$("#img-loading").attr("src","images/elements/big-loading-waiting.svg");
             html = await http("https://www.facebook.com", false, null);
+
+            if (html == null)
+                return -1;
+
             doc = parser.parseFromString(html, "text/html");
-            log.m("Position of substring 'fb_dtsg' in the whole html string: " + html.indexOf("fb_dtsg"));
+            log.m("Position of token's substring in the whole loaded string: " + html.indexOf("fb_dtsg"));
             html = "";
     
             // Looks for <div class="hidden_elem">
             let hiddenElems = $("div[class*='hidden_elem']", doc).children();
-            log.m("Number of childrens of 'div.hidden_elem': " + hiddenElems.length);
+            log.m("Number of childrens of div.hidden_elem: " + hiddenElems.length);
     
             for(i = 0; i < hiddenElems.length; i++) {
     
@@ -128,10 +176,10 @@ var tcLoader = (function () {
                 
             }
             else
-                log.w("Substring 'fb_dtsg' cannot be found in any div.hidden_elem");
+                log.w("Token's substring cannot be found in any div.hidden_elem");
 
-            log.m("FB_DTSG Length: " + fb_dtsg.length);
-            log.m("C_USER Length: " + c_user.length);
+            log.m("TOKEN Length: " + fb_dtsg.length);
+            log.m("ID Length: " + c_user.length);
 
             if (fb_dtsg != "" || c_user != "")
                 return { fb_dtsg: fb_dtsg, c_user: c_user };
@@ -158,19 +206,26 @@ var tcLoader = (function () {
      * 
      * @see /.doc/raw.json
      * 
-     * @returns {Object} JSON object of raw data or NULL on error.
+     * @returns {Object} JSON object of raw data | NULL on error | -1 on internet fail
      */
     async function getRawData(authTokens) {
 
         try {
 
-            log.l("loader.js:getRawData");
+            log.l("RawData");
 
             let url = "https://www.facebook.com/api/graphqlbatch/";
             let postData = "__user={0}&__a=1&fb_dtsg={1}".format(authTokens["c_user"], authTokens["fb_dtsg"]);
             postData += "&queries=%7B%22o0%22%3A%7B%22doc_id%22%3A%221349387578499440%22%2C%22query_params%22%3A%7B%22limit%22%3A1000%2C%22before%22%3Anull%2C%22includeDeliveryReceipts%22%3Atrue%2C%22includeSeqID%22%3Afalse%7D%7D%7D";
         
+            //REMOVE BELOW
+            url = ".doc/test-raw.json";
+            postData = null; 
+
             let json = await http(url, true, postData);
+
+            if (json == null)
+                return -1;
 
             // Removes extra JSON object at the end of the response string
             let lastIndex = json.lastIndexOf("{");
@@ -216,7 +271,7 @@ var tcLoader = (function () {
 
         try {
 
-            log.l("loader.js:createFinalData");
+            log.l("FinalData");
 
             let finalData = [];
             let threads = rawData.o0.data.viewer.message_threads.nodes;
@@ -225,7 +280,7 @@ var tcLoader = (function () {
             threads.forEach(t => {
                 
                 let obj;
-                let fbid, is_user, full_name, short_name, image_url, count, count_str;
+                let fbid, is_user, name, short_name, name_tag, image_url, count, count_str;
                 
                 // Sets the common fields in USERS and GROUPS type.
                 is_user = (t.thread_key.thread_fbid == null);
@@ -239,15 +294,27 @@ var tcLoader = (function () {
 
                     // Chooses the OTHER_USER object from participants array
                     let other_user;
-                    for(i = 0; i < 2; i++) {
+                    for(i = 0; i < t.all_participants.nodes.length; i++) {
 
                         other_user = t.all_participants.nodes[i].messaging_actor;
 
                         if (other_user.id == fbid) {
 
-                            full_name = other_user.name;
+                            // name
+                            name = other_user.name;
+                            name = name == "" ? "Unknown" : name;
+
+                            // short_name
                             short_name = other_user.short_name;
-                            short_name = short_name == null ? getShortName(full_name) : short_name;
+                            short_name = short_name == null ? getShortName(name) : short_name;
+
+                            // name_tag
+                            name_tag = name.toLowerCase();
+
+                            // users
+                            users = [name];
+
+                            // image url
                             image_url = other_user.big_image_src;
                             image_url = image_url == null ? "images//error-image.jpg" : image_url.uri;
 
@@ -257,14 +324,25 @@ var tcLoader = (function () {
                     } // END OF FOR
                 } // END OF IF
                 else {
-                    // dont forget about unnamed groups
-                    let name = t.name;
-                    name = name == null ? createUntitledGroupName(t.all_participants.nodes) : name;
+                    
                     fbid = t.thread_key.thread_fbid;
-                    full_name = name;
-                    short_name = name;
+
+                    // name
+                    name = t.name;
+                    name = name == null ? createUntitledGroupName(t.all_participants.nodes) : name;
+
+                    // short_name
+                    short_name = null;
+
+                    // name_tag
+                    name_tag = getGroupsNameTag(t.all_participants.nodes);
+
+                    // users
+                    users = getGroupsUsersList(t.all_participants.nodes);
+
+                    // image_url
                     image_url = t.image;
-                    image_url = image_url == null ? "images//group_not_found.png" : image_url.uri;
+                    image_url = image_url == null ? "images//error-image-group.png" : image_url.uri;
 
                 }
 
@@ -273,8 +351,10 @@ var tcLoader = (function () {
 
                     fbid: fbid,
                     is_user: is_user,
-                    full_name: full_name,
+                    name: name,
                     short_name: short_name,
+                    name_tag: name_tag,
+                    users: users,
                     image_url: image_url,
                     count: count,
                     count_str: count_str
@@ -298,6 +378,49 @@ var tcLoader = (function () {
     }
 
     /**
+     * Gets userData from rawData.
+     * 
+     * Creates JSON object containing 'name' and 'short_name'
+     * 
+     * @param {*} rawData JSON of raw data.
+     * 
+     * @see raw.json (structure of rawData)
+     * 
+     * @return JSON object.
+     */
+    function getUserData(c_user, rawData) {
+
+        // A random thread
+        let thread = rawData.o0.data.viewer.message_threads.nodes[0];
+        // Array of all users
+        let nodes = thread.all_participants.nodes;
+        // Data
+        let name = "Unknown";
+        let short_name = "Unknown";
+
+        for(i = 0; i < nodes.length; i++) {
+
+            let user = nodes[i].messaging_actor;
+
+            if (user.id != c_user) continue;
+
+            name = user.name;
+            name = name == "" ? "Unknown" : name;
+            short_name = user.short_name;
+            short_name = short_name == null ? getShortName(name) : short_name;
+
+            break;
+
+        }
+
+        return {
+            name: name,
+            short_name: short_name
+        }
+
+    }
+
+    /**
      * Creates group name from its users' first name.
      * 
      * @param {*} nodes all_participants.nodes array from a thread object in rawData
@@ -316,8 +439,9 @@ var tcLoader = (function () {
     
                 let user = nodes[i].messaging_actor;
                 full_name = user.name;
+                display_name = full_name == "" ? "Unknown" : full_name;
                 short_name = user.short_name;
-                short_name = short_name == null ? full_name : short_name;
+                short_name = short_name == null ? getShortName(display_name) : short_name;
     
                 if (i == count - 1) {
     
@@ -354,6 +478,52 @@ var tcLoader = (function () {
     }
 
     /**
+     * Creates name_tag for groups
+     * 
+     * @param {*} nodes all_participants.nodes array from a thread object in rawData
+     * 
+     * @returns {string} Name tag for group.
+     */
+    function getGroupsNameTag(nodes) {
+
+        let name_tag = "";
+
+        for (i = 0; i < nodes.length; i++) {
+    
+            let name = nodes[i].messaging_actor.name;
+
+            if (name != "")
+                name_tag += name.toLowerCase() + " ";
+        }
+
+        return name_tag;
+
+    }
+
+    /**
+     * Creates array of group users
+     * 
+     * @param {*} nodes all_participants.nodes array from a thread object in rawData
+     * 
+     * @returns {string} JSON array.
+     */
+    function getGroupsUsersList(nodes) {
+
+        let users = [];
+
+        for (i = 0; i < nodes.length; i++) {
+    
+            let name = nodes[i].messaging_actor.name;
+
+            if (name != "")
+                users.push(name);
+        }
+
+        return users;
+
+    }
+
+    /**
      * Creates first name from long names.
      * 
      * Splits long name by space character, takes the first element
@@ -372,18 +542,8 @@ var tcLoader = (function () {
 
     }
 
-    /** [ASYNC] Loads and Returns final.json from local storage */
-    async function loadObjFinalFromLocal(c) {
-        
-        let jsonString = await http("../.doc/final.json", false, null);
-        let jsonObj = JSON.parse(jsonString);
-        return jsonObj;
-    }
-
-
-
     return {
-        loadObjFinalFromLocal: loadObjFinalFromLocal,
+        getUserData: getUserData,
         getAuthTokens: getAuthTokens,
         getRawData: getRawData,
         createFinalData: createFinalData,

@@ -9,6 +9,8 @@ var tcUi = (function () {
     let localUserData = {};
     // Filtered version of localFinalData. Filtered from types.
     let filteredFinalData = [];
+    // Vue instance
+    let vm = null;
 
     /** 
      * Updates Left and Right panel.
@@ -22,11 +24,11 @@ var tcUi = (function () {
     function updateUi() {
 
         // Panel right
-        filterFinalDataByType();
-        updatePanelRight(sortFinalData(filteredFinalData));
+        //filterFinalDataByType();
+        //updatePanelRight();
 
         // Panel left
-        updatePanelLeft(localUserData, localFinalData);
+        //updatePanelLeft(localUserData, localFinalData);
     }
 
     /** 
@@ -34,7 +36,7 @@ var tcUi = (function () {
      * 
      * This function is called by updateUi
      */
-    function updatePanelRight(finalData) {
+    function updatePanelRight() {
 
             /* $("#tbl-main tbody").fadeOut(100);
             $("#tbl-main tbody").remove();
@@ -50,14 +52,16 @@ var tcUi = (function () {
             $("#tbl-main").append(tbody);
             tbody.fadeIn(100); */
 
-            let html = "";
+            /* let html = "";
             for(i = 0; i < finalData.length; i++) {
 
                 let obj = finalData[i];
                 html += ( createTrObjX(obj));
 
             }
-            $("#tbl-main tbody").html(html);
+            $("#tbl-main tbody").html(html); */
+
+
              
     }
 
@@ -240,49 +244,10 @@ var tcUi = (function () {
 
     }
 
-    /**
-     * Sorts finalData in ascending order.
-     * 
-     * @param {*} finalData Generated from loader.js:createFinalData
-     * 
-     * @see final.json
-     * 
-     * @return Sorted finalData.
-     */
-    function sortFinalData(finalData) {
-
-        try {
-
-            let isSwapped = true;
-
-            while (isSwapped) {
-
-                isSwapped = false;
-                for(i = 0; i < finalData.length-1; i++) {
-
-                    if (finalData[i].count < finalData[i+1].count) {
-        
-                        let temp = finalData[i+1];
-                        finalData[i+1] = finalData[i];
-                        finalData[i] = temp;
-                        isSwapped = true;
-                    }
-        
-                    finalData[i].pos = i+1;
-                    finalData[i+1].pos = i+2;
-        
-                }
-
-            }
-
-            return finalData;
+    function lmao() {
+        while (localFinalData.length > 0) {
+            localFinalData.pop();
         }
-        catch (err) {
-
-            log.e(err.message + " @ " + err.stack);
-
-        }
-        
 
     }
 
@@ -298,8 +263,120 @@ var tcUi = (function () {
      */
     function setFinalData(userData, finalData) {
         localUserData = userData;
-        localFinalData = sortFinalData(finalData);
+
+        while (localFinalData.length > 0) {
+            localFinalData.pop();
+        }
+
+        while( finalData.length > 0) {
+            localFinalData.push(finalData.shift());
+        }
+
         filteredFinalData = localFinalData;
+
+        if (vm == null)
+        vm = new Vue({
+            el: "#div-tbl-main",
+            data: {
+                arr: localFinalData,
+                filterType: "users groups",
+                searchString: ""
+            },
+            methods: {
+                isVisible: function (elem) {
+                    
+
+                        if (elem.is_user && this.filterType.indexOf("user") == -1)
+                            return false;
+                        else if (!elem.is_user && this.filterType.indexOf("groups") == -1)
+                            return false;
+                        else if (this.searchString == "")
+                            return true;
+                        else if (this.searchString != "") {
+                            let matchName = (elem.name.toLowerCase().indexOf(this.searchString) != -1);
+                            let matchNameTag = (elem.name_tag.indexOf(this.searchString) != -1);
+                            return (matchName && !elem.custom_name) || matchNameTag;
+                        }
+                        else
+                            return true; 
+
+                },
+
+                getDisplay: function (a) {
+                    return this.isVisible(a) ? "" : "none";
+                },
+
+                getTdActualPos: function(a) {
+
+                    let actual_pos = a.pos;
+
+                    if (this.filterType == "users" && a.is_user) {
+
+                        actual_pos = a.pos_in_users;
+
+                    } else if (this.filterType == "groups" && !a.is_user) {
+                        
+                        actual_pos = a.pos_in_groups;
+
+                    }
+
+                    return actual_pos;
+                },
+
+                getTdPosClass: function (a) {
+
+                    let actual_pos = this.getTdActualPos(a);
+
+                    if (actual_pos == 1) 
+                        return {'color-gold': true };
+                    else if (actual_pos == 2)
+                        return {'color-silver': true };
+                    else if (actual_pos == 3)
+                        return {'color-bronze': true };
+                    else 
+                        return {'color-gold': false };
+                },
+
+                getHighlightedName: function (a) {
+
+                    let html = "";
+
+                    let is_user = a.is_user;
+                    let name = a.name;
+                    let name_tag = a.name_tag;
+                    let matchIndexNameTag = name_tag.indexOf(this.searchString);
+                    let matchIndexName = name.toLowerCase().indexOf(this.searchString);
+                    let filterStringLen = this.searchString.length;
+
+                    if (this.searchString == "")
+                        html = a.name;
+                    else if (matchIndexName != -1 && !a.custom_name) {
+
+                        html = name.slice(0, matchIndexName);
+                        html += "<span class='mark'>";
+                        html += name.slice(matchIndexName, matchIndexName+filterStringLen);
+                        html += "</span>";
+                        html += name.slice(matchIndexName+filterStringLen);
+
+                    }
+                    else if (matchIndexNameTag != -1) {
+
+                        html += "<span class='mark'>";
+                        html += a.name;
+                        html += "</span>";
+
+                    }
+                    else 
+                        html = a.name;
+
+                    return html;
+
+                }
+            }
+        });
+
+        //lazyImgUpdater();
+
     }
 
     /**
@@ -390,31 +467,58 @@ var tcUi = (function () {
     // Emits when filter-type (radio button) changes.
     $(".rd-filter").on("change", async function () {
 
-        filterType = $(this).attr("value");
-        filterFinalDataByType();
-        await updatePanelRight(sortFinalData(filteredFinalData));
+        vm.filterType = $(this).attr("value");        
+        let filterStringNew = $("#tb-search").val().trim().toLowerCase();
+
+        //lazyImgUpdater();
+        filterString = filterStringNew;
+        vm.searchString = filterStringNew;
 
     });
 
     // Emits when data is being input in search textbox.
     $("#btn-search").on("click", function () {
 
-        let filterStringNew = $("#tb-search").val().trim();
+        let filterStringNew = $("#tb-search").val().trim().toLowerCase();
 
         if (filterStringNew == filterString)
             return;
 
+            //lazyImgUpdater();
         filterString = filterStringNew;
-        filterFinalDataBySearch();
+        vm.searchString = filterStringNew;
 
     });
 
+    function lazyImgUpdater() {
+
+        $(".td-content-img").addClass("lazy");
+        var lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
+
+        if ("IntersectionObserver" in window) {
+            let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        let lazyImage = entry.target;
+                        lazyImage.src = lazyImage.dataset.src;
+                        lazyImage.classList.remove("lazy");
+                        lazyImageObserver.unobserve(lazyImage);
+                    }
+                });
+            });
+
+            lazyImages.forEach(function(lazyImage) {
+
+                    lazyImageObserver.observe(lazyImage);
+            });
+        }
+
+    }
+
     return {
         updateUi: updateUi,
-
-        sortFinalData: sortFinalData,
-
-        setFinalData: setFinalData
+        setFinalData: setFinalData,
+        lmao: lmao
     }
 
 })();

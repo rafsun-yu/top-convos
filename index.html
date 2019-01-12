@@ -21,6 +21,9 @@
     <link href="style-responsive.css" type="text/css" rel="stylesheet" />
     <link href="style-modal.css" type="text/css" rel="stylesheet" />
 
+    <!-- Vue -->
+    <script src="libraries/vue/vue.js"></script>
+
 </head>
 
 <body>
@@ -167,7 +170,7 @@
                                 </div>
 
                                 <div class="col">
-                                    <label class="lbl-filter"><input class="rd-filter" type="radio" name="filter" value="both"
+                                    <label class="lbl-filter"><input class="rd-filter" type="radio" name="filter" value="users groups"
                                             checked> Both</label>
                                 </div>
 
@@ -179,19 +182,22 @@
 
                     <!-- Table -->
                     <div id="div-tbl-main">
+                        <ul>
+                            <li class="tr-main" v-for="a in arr" v-bind:style="{display: getDisplay(a)}">
+                                <span class="td-pos" v-bind:class="getTdPosClass(a)">#{{getTdActualPos(a)}}</span>
 
-                        <table id="tbl-main">
+                                <div class="td-content">
 
-                            <tbody>
+                                    <img class="td-content-img" src="images/error-image.jpg" :data-src="a.image_url">
 
+                                    <div class="td-content-texts">
+                                        <span class="td-content-texts-name" v-html="getHighlightedName(a)"></span>
+                                        <span class="td-content-texts-info">{{a.count_str}}</span>
+                                    </div>
 
-
-                                <!---->
-                                <!---->
-
-                            </tbody>
-
-                        </table>
+                                </div>
+                            </li>
+                        </ul>
 
                     </div>
 
@@ -236,6 +242,7 @@
     <script src="js/log.js"></script>
     <script src="js/helper.js"></script>
     <script src="js/loader.js"></script>
+    <script src="js/ui-vue.js"></script>
     <script src="js/ui.js"></script>
     <script src="js/main.js"></script>
 

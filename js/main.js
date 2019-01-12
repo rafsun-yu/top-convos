@@ -39,7 +39,7 @@
         authTokens.c_user = "100012214833676";
         authTokens.fb_dtsg = "F";
 
-       /*  showLoading(true);
+/*         showLoading(true);
 
         if (shouldIncludeAuthTokens || authTokens == null || authTokens.fb_dtsg == null) {
 

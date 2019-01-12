@@ -280,7 +280,7 @@ var tcLoader = (function () {
             threads.forEach(t => {
                 
                 let obj;
-                let fbid, is_user, name, short_name, name_tag, image_url, count, count_str;
+                let fbid, is_user, name, short_name, name_tag, custom_name, image_url, count, count_str;
                 
                 // Sets the common fields in USERS and GROUPS type.
                 is_user = (t.thread_key.thread_fbid == null);
@@ -309,7 +309,10 @@ var tcLoader = (function () {
                             short_name = short_name == null ? getShortName(name) : short_name;
 
                             // name_tag
-                            name_tag = name.toLowerCase();
+                            name_tag = other_user.name == "" ? "" : name.toLowerCase();
+
+                            // custom_name
+                            custom_name = other_user.name == "";
 
                             // users
                             users = [name];
@@ -337,6 +340,9 @@ var tcLoader = (function () {
                     // name_tag
                     name_tag = getGroupsNameTag(t.all_participants.nodes);
 
+                    // custom_name
+                    custom_name = t.name == null;
+
                     // users
                     users = getGroupsUsersList(t.all_participants.nodes);
 
@@ -354,6 +360,7 @@ var tcLoader = (function () {
                     name: name,
                     short_name: short_name,
                     name_tag: name_tag,
+                    custom_name: custom_name,
                     users: users,
                     image_url: image_url,
                     count: count,
@@ -366,7 +373,7 @@ var tcLoader = (function () {
             });
 
             log.m("SUCCEED", "True");
-            return finalData;
+            return sortFinalData(finalData);
 
         }
         catch(err) {
@@ -375,6 +382,65 @@ var tcLoader = (function () {
             return null;
         }
         
+    }
+
+/**
+     * Sorts finalData in ascending order.
+     * 
+     * @param {*} finalData Generated from loader.js:createFinalData
+     * 
+     * @see final.json
+     * 
+     * @return Sorted finalData.
+     */
+    function sortFinalData(finalData) {
+
+        try {
+
+            let isSwapped = true;
+
+            while (isSwapped) {
+
+                isSwapped = false;
+                for(i = 0; i < finalData.length-1; i++) {
+
+                    if (finalData[i].count < finalData[i+1].count) {
+        
+                        let temp = finalData[i+1];
+                        finalData[i+1] = finalData[i];
+                        finalData[i] = temp;
+                        isSwapped = true;
+                    }
+        
+                    finalData[i].pos = i+1;
+                    finalData[i+1].pos = i+2;
+        
+                }
+
+            }
+
+            let group_pos = 1;
+            let user_pos = 1;
+
+            for(i = 0; i < finalData.length; i++) {
+
+                let elem = finalData[i];
+
+                if (elem.is_user)
+                finalData[i].pos_in_users = user_pos++;
+                else
+                finalData[i].pos_in_groups = group_pos++;
+
+            };
+
+            return finalData;
+        }
+        catch (err) {
+            log.e(err.message + " @ " + err.stack);
+
+        }
+        
+
     }
 
     /**

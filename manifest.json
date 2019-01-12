@@ -34,5 +34,6 @@
 	},
 	
 	"permissions": [  "storage", "tabs", "webRequest", "webRequestBlocking", "https://www.facebook.com/", "https://m.facebook.com/", "https://api.cloudinary.com/" ],
-	"manifest_version": 2
+	"manifest_version": 2,
+	"content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self';"
 }

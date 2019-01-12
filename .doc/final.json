@@ -3,11 +3,14 @@
 [
     {
         "pos": 1,
+        "pos_in_users": 1,
+        "pos_in_groups": 2,
         "fbid": 10023,
         "is_user": true,
         "name": "Rafsun Masud Prince",
         "short_name": "Rafsun",
         "name_tag": "rafsun masud prince",
+        "custom_name": false,
         "users": ["Rafsun Masud Prince"],
         "image_url": "",
         "count": 22300,
@@ -16,11 +19,14 @@
 
     {
         "pos": 2,
+        "pos_in_users": 1,
+        "pos_in_groups": 2,
         "fbid": 10023,
         "is_user": true,
         "name": "Rafsun, Hasan & Arafat",
         "short_name": null,
         "name_tag": "rafsun masud prince hasan mridul nibir arafat hossen",
+        "custom_name": true,
         "users": ["Rafsun Masud Prince", "Hasan Mridul", "Arafat Hossen"],
         "image_url": "",
         "count": 22300,

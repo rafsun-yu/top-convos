@@ -1,0 +1,6 @@
+2.0.0
+- User interface updated; completely new and flexible.
+- Performance enhanced.
+- Now allows users to see name of the members in group conversations.
+- New "groyp-only" filter type added.
+- Fixed loading issues for some users.

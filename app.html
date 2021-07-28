@@ -1,0 +1,338 @@
+<html>
+
+<head>
+
+    <title>Top Convos</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Jquery -->
+    <script src="js/lib/jquery-3.4.1/jquery-3.4.1.js"></script>
+
+    <!-- Popper -->
+    <script src="js/lib/popper/popper.js"></script>
+    <script src="js/lib/popper/tooltip.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="js/lib/bootstrap-4.3.1/bootstrap.js"></script>
+    <link href="js/lib/bootstrap-4.3.1/bootstrap.css" type="text/css" rel="stylesheet" />
+
+    <!-- Vue -->
+    <script src="js/lib/vue/vue.min.js"></script>
+
+    <!-- CSS and Icon -->
+    <link href="img/logo/logo-icon-24.png" rel="icon">
+    <link href="css/common.css" type="text/css" rel="stylesheet" />
+    <link href="css/header.css" type="text/css" rel="stylesheet" />
+    <link href="css/body.css" type="text/css" rel="stylesheet" />
+    <link href="css/body-panel-right.css" type="text/css" rel="stylesheet" />
+    <link href="css/body-panel-left.css" type="text/css" rel="stylesheet" />
+    <link href="css/responsive.css" type="text/css" rel="stylesheet" />
+    <link href="css/modal.css" type="text/css" rel="stylesheet" />
+
+</head>
+
+<body>
+
+    <!-- Main Body -->
+    <div id="div-main" class="container-fluid">
+
+        <!-- Section: Header -->
+        <div id="sec-header" class="container-fluid brdr">
+            <div class="row h-100">
+
+                <!-- Logo and Title -->
+                <div class="col my-auto">
+
+                    <img id="img-logo" class="align-middle" src="img/logo/logo-icon-64.png" height="54">
+                    <span id="spn-title" class="align-middle">Top Convos</span>
+
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="col my-auto">
+                    <div class="float-right">
+
+                        <button id="btn-header-about" class="btn btn-default btn-nav"><img src="img/ui/about.svg"
+                                height="24px"></button>
+                        <button id="btn-header-terms" class="btn btn-default btn-nav"><img src="img/ui/policy.svg"
+                                height="24px"></button>
+                        <button id="btn-header-reload" class="btn btn-default btn-nav"><img src="img/ui/reload.svg"
+                                height="24px"></button>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Horizontal Border -->
+        <div id="div-border"></div>
+
+        <!-- Section: Body -->
+        <div id="sec-body" class="container-fluid brdr">
+
+            <!-- Loading -->
+            <div id="div-loading">
+                <div class="loader loader-blue" id="img-loading"></div>
+            </div>
+
+            <!-- Actual Body -->
+            <div id="sec-body-row" class="row">
+
+                <!-- Panel: Left -->
+                <div id="sec-panel-left" class="col">
+                    <div id="sec-panel-left-container">
+
+                        <!-- Support Developer -->
+                        <div id="div-support">
+
+                            <!-- Facebook Like -->
+                            <div id="div-fb-like" style="display:none;">
+
+                                <iframe id="fb-like-panel" class="fb-like"></iframe>
+                                <span>Like developer's page to get news and updates.</span>
+
+                            </div>
+
+                            <!-- Mozilla Review -->
+                            <div id="div-mozilla-review">
+                                <span>
+                                    <a href="https://addons.mozilla.org/en-US/firefox/addon/top-convos/reviews/"
+                                        target="_blank">
+                                        Post a review
+                                    </a>
+                                    on Mozilla addon store to share your experience with others.
+                                </span>
+                            </div>
+
+                        </div>
+
+                        <!-- Title -->
+                        <div id="div-title-main" class="no-info">
+                            <span></span>
+                        </div>
+
+                        <!-- Top Three Results -->
+                        <div id="div-results-main-wrapper">
+                            <div id="div-results-main" class="container-fluid">
+                                <div id="div-results-row" class="row">
+
+                                    <!-- Result-1 -->
+                                    <div class="col col-result">
+
+                                        <img class="col-result-img color-gold no-info"
+                                            src="img/others/placeholder-user-image.png">
+                                        <span class="col-result-name no-info"></span>
+                                        <span class="col-result-info no-info"></span>
+
+                                    </div>
+
+                                    <!-- Result-2 -->
+                                    <div class="col col-result">
+
+                                        <img class="col-result-img color-silver no-info"
+                                            src="img/others/placeholder-user-image.png">
+                                        <span class="col-result-name no-info"></span>
+                                        <span class="col-result-info no-info"></span>
+
+                                    </div>
+
+                                    <!-- Result-3 -->
+                                    <div class="col col-result">
+
+                                        <img class="col-result-img color-bronze no-info"
+                                            src="img/others/placeholder-user-image.png">
+                                        <span class="col-result-name no-info"></span>
+                                        <span class="col-result-info no-info"></span>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Share on Facebook button -->
+                        <div class="div-btn-share">
+                            <a class="btn-share">
+
+                                <img src="img/ui/facebook-white.png" height="20px">
+                                Share
+                                <img class="btn-share-loading" src="img/ui/share-loading.svg" height="20px" hidden>
+
+                            </a>
+                        </div>
+
+                        <!-- News -->
+                        <div id="div-news" style="display:none;">
+                            <a id="anchor-news" href="#" target="_blank">
+                                <img id="img-news">
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Panel: Right -->
+                <div id="sec-panel-right" class="col-3">
+
+                    <!-- Search and Filter-->
+                    <form id="form-filter" class="form">
+
+                        <!-- Search -->
+                        <div id="div-search">
+
+                            <input id="tb-search" class="form-control" type="textbox" placeholder="Search">
+                            <a id="btn-search-cross"><img src="img/ui/cross.svg" height="10px"></a>
+                            <a id="btn-search"><img src="img/ui/search.svg" height="20px"></a>
+
+                        </div>
+
+                        <!-- Filter -->
+                        <div id="div-filter" class="container-fluid">
+                            <div id="div-row-filter" class="row">
+
+                                <div class="col">
+                                    <label class="lbl-filter"><input class="rd-filter" type="radio" name="filter"
+                                            value="users">
+                                        Users</label>
+                                </div>
+
+                                <div class="col">
+                                    <label class="lbl-filter"><input class="rd-filter" type="radio" name="filter"
+                                            value="groups">
+                                        Groups</label>
+                                </div>
+
+                                <div class="col">
+                                    <label class="lbl-filter"><input class="rd-filter" type="radio" name="filter"
+                                            value="users groups" checked> Both</label>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </form>
+
+                    <!-- List -->
+                    <div id="div-tbl-main">
+                        <ul id="ul-tbl-main">
+                            <li class="tr-main" v-for="elem in arr" v-bind:style="{display: getDisplayStyle(elem)}">
+
+                                <!-- Position -->
+                                <span class="td-pos"
+                                    v-bind:class="getDecorationClass(elem)">#{{getActualPos(elem)}}</span>
+
+                                <!-- Profile Picture -->
+                                <div class="td-content-img-wrapper">
+                                    <img class="td-content-img" src="img/others/placeholder-user-image.png"
+                                        :data-src="elem.image_url">
+                                </div>
+
+                                <!-- Texts-->
+                                <div class="td-content-text">
+
+                                    <!-- Name and Icon -->
+                                    <span class="td-content-text-name-wrapper">
+
+                                        <!-- Name -->
+                                        <span class="td-content-texts-name" v-html="getHighlightedName(elem)"></span>
+
+                                        <!-- Group-Users Icon -->
+                                        <img class="td-content-group-users" src="img/ui/group-users.svg"
+                                            v-if="!elem.is_user" v-on:click="showTooltip($event, elem.users)"
+                                            v-on:mouseover="showTooltip($event, elem.users)">
+
+                                    </span>
+
+                                    <!-- Count -->
+                                    <span class="td-content-texts-info">{{elem.count_str}}</span>
+
+                                </div>
+
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Share on Facebook button -->
+                    <div id="div-btn-share-mobile" class="div-btn-share">
+                        <a class="btn-share">
+                            <img src="img/ui/facebook-white.png" height="24px">
+                            Share on Facebook
+                            <img class="btn-share-loading" src="img/ui/share-loading.svg" height="24px" hidden>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Modals -->
+    <div id="modal-error" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div id="modal-error-header" class="modal-header">
+                    <h5 id="modal-error-title">
+                        <img src="img/ui/warning.svg" height="24px" style="padding-right:8px;">
+                        <span>Alert</span>
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div id="modal-error-body" class="modal-body">
+
+                    <p id="modal-error-msg"></p>
+                    <p id="modal-error-report">
+                        <div class="m-err-rep">
+                            Possible solution:
+                            <br>(1) Switch back to "Classic View" in Facebook and then reload this tab.
+                            <br>(2) Reload the page.
+                            <br>(3) Update Firefox to latest version.
+                            <br>(4) If you are using Firefox on an old android device, try desktop instead.
+                        </div>
+
+                        <div class="m-err-rep">
+                            <br> If you think a bug is causing the error,
+                            then you may want to send the log file to the developer to help debugging.
+                            <a id="btn-modal-error-log-download" download="error.log" href="">Download log</a>
+                        </div>
+
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="modal-support-prompt" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div id="modal-support-prompt-content" class="modal-content">
+                <div id="modal-support-prompt-body" class="modal-body">
+                    <div id="div-modal-support-prompt-body">
+                        <div id="support-heading">Show your support!</div>
+                        <div id="support-heading-2">Please like developer's page and continue.</div>
+                        <iframe id="fb-like-modal" class="fb-like"></iframe>
+                        <span id="spn-no-thanks"><a id="btn-no-thanks" href="#">No thanks</a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="floating-msg">
+        <span id="floating-msg-text">Please wait. This might take longer than usual.</span>
+    </div>
+
+    <!-- Loading Scripts -->
+    <script src="js/app/log.js"></script>
+    <script src="js/app/helper.js"></script>
+    <script src="js/app/loader-canvas.js"></script>
+    <script src="js/app/loader.js"></script>
+    <script src="js/app/ui-vue.js"></script>
+    <script src="js/app/ui.js"></script>
+    <script src="js/app/main.js"></script>
+
+</body>
+
+</html>

@@ -1,28 +1,46 @@
+(function () {
+	subscribeToEvents();
 
-function focusOrCreateTab(url) {
-	var windows = browser.tabs.query({}); 
-	windows.then( function(tabs) {
-	var existing_tab = null;
-	for (let tab of tabs) {
-		  console.log(tab.url.replace("#",""));
-		if (tab.url.replace("#","") == url) {
-		  existing_tab = tab;
-		  break;
-		}
+	/**
+	 * Creates a tab with the given url.
+	 * 
+	 * If a tab with the same url is already opened, then focus on it.
+	 * 
+	 * @param {*} url URL.
+	 */
+	function focusOrCreateTab(url) {
+		let windows = browser.tabs.query({});
+	
+		// Loops through all opened windows.
+		windows.then(function (tabs) {
+			let mainTab = null;
+	
+			// Loops through all opened tabs.
+			for (let tab of tabs) {
+				if (tab.url.replace("#", "") == url) {
+					mainTab = tab;
+					break;
+				}
+			}
+	
+			// If tab exists, then focus.
+			if (mainTab != null) 
+				browser.tabs.update(mainTab.id, { "active": true });
+			// Else create new tab.
+			else 
+				browser.tabs.create({ "url": url, "active": true });
+		},{});
 	}
-    
-    if (existing_tab != null) {
-		browser.tabs.update(existing_tab.id, {"active":true});
-    } else {
-		
-		browser.tabs.create({"url":url, "active":true});
-    } 
-	}, 
-	{});
-}
-
-browser.browserAction.onClicked.addListener(function(tab) {
-  var manager_url = browser.extension.getURL("index.html");
-
-  focusOrCreateTab(manager_url);
-});
+	
+	/**
+	 * Subscribes to events. 
+	 */
+	function subscribeToEvents() {
+		// When addon icon is clicked (for example, on the toolbar).
+		browser.browserAction.onClicked.addListener(function (tab) {
+			//let url = browser.extension.getURL(".test/UnitTest/unit.html");
+			let url = browser.extension.getURL("app.html");
+			focusOrCreateTab(url);
+		});
+	}
+})();

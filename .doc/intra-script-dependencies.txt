@@ -1,0 +1,56 @@
+
+$$  Child-Call-Parents Method
+
+    * sample-script.js
+            - other-script-where-sample-script.js-is-called.
+                    # function-that-called-sample-script : function-from-sample-script-that-is-called.
+
+    * log.js
+            - loader-canvas.js
+            - loader.js
+            - main.js
+            - ui-vue.js
+
+    * helper.js
+            -
+
+    * loader.js
+            - main.js
+                    # refreshData:
+                            getAuthTokens
+                            getRawData
+                            createMainData
+                    # subscribeToEvents: 
+                            showFbSharePopup
+                            hasUserLikedPage
+                            http
+
+    * loader-canvas.js
+            - loader.js
+                    # showFbSharePopup: getCanvasUri
+
+    * ui-vue.js 
+            - ui.js
+                    # updatePanelRight: setVmArray
+                    # onRadioChange: setVmFilterType
+                    # onSearchClick: setVmSearchString
+                    # onSearchCrossClick: setVmSearchString
+
+    * ui.js
+            - main.js
+                    # refreshData: updateUi
+                    # subscribeToEvents: 
+                            loadIframes
+                            updateDivNews
+                            resizeTopUsersContainer
+
+    * main.js
+            (independent)
+
+$$ Parent-Call-Child Method
+
+    * main.js
+            - loader.js
+                    - loader-canvas.js
+            - ui.js
+                    - ui-vue.js

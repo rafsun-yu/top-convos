@@ -1,9 +1,27 @@
 0. [D] init (main.js)
 
-        * Contains finalData (final.json)
         * When tab is first opened it fetches fb-dtsg and reloads threadlist
           But if reload button is clicked it only reloads threadlist
         * Must update version no in about.html. 
+        * Structure of main.js -> mainData.
+                data: {
+                        authTokens: {
+                                c_user: [string],
+                                fb_dtsg: [string]
+                        },
+                        loggedUser: {
+                                name: [string],
+                                short_name: [string],
+                                id: [string]
+                        },
+                        finalData: [
+                                <final.json>
+                        ],
+                        topUsers: [
+
+                        ],
+                        isTopUsersChanged: [bool]
+                }
 
 1. [D] Load json objects (loader.js)
 
@@ -30,13 +48,13 @@
         3. Prompt a share dialog
 
 IDEAS:
-        - Add cross button on searchbox
-        - [X] Fadeout on overflow, in left panel names.
-        - bigger group image not found image.
-        - popover shows all users of group
+        - [D] Add cross button on searchbox
+        - [D] bigger group image not found image.
+        - [D] popover shows all users of group
         
 TASKS:
-        - [D] hide tbody before adding tr.
-        - [D] deleted users "UNTITLED" name disappears after searchbox clear.
-        - [D] modify polciy. addon doesnt use localstorage anymore.
-        - [D] Get users information.
+        - add credit option.
+        - change version in about.
+
+INFO:
+        * Promo banner size: 610 x 115 px

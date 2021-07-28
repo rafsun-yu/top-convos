@@ -13,6 +13,7 @@
         "custom_name": false,
         "users": ["Rafsun Masud Prince"],
         "image_url": "",
+        "custom_image": false,
         "count": 22300,
         "count_str": "22,300"
     },
@@ -29,6 +30,7 @@
         "custom_name": true,
         "users": ["Rafsun Masud Prince", "Hasan Mridul", "Arafat Hossen"],
         "image_url": "",
+        "custom_image": false,
         "count": 22300,
         "count_str": "22,300"
     },

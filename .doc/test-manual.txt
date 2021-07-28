@@ -1,0 +1,8 @@
+1. Open Firefox.
+2. Go to this url "about:debugging".
+3. Click "Load temporary addon" button.
+4. Choose "manifest.json" from the zip.
+5. Now, the addon icon must appear in the toolbar. Try it.
+6. Open Console window by pressing "Ctr' + Shift + I".
+7. Copy the log data from Console tab.
+8. Save it to a text file, and send it to the developer.

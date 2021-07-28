@@ -1,0 +1,70 @@
+<head>
+
+    <title>Top Convos</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Jquery -->
+    <script src="js/lib/jquery-3.4.1/jquery-3.4.1.js"></script>
+
+    <!-- Popper -->
+    <script src="js/lib/popper/popper.js"></script>
+    <script src="js/lib/popper/tooltip.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="js/lib/bootstrap-4.3.1/bootstrap.js"></script>
+    <link href="js/lib/bootstrap-4.3.1/bootstrap.css" type="text/css" rel="stylesheet" />
+
+    <!-- Vue -->
+    <script src="js/lib/vue/vue.min.js"></script>
+
+    <!-- CSS and Icon -->
+    <link href="img/logo/logo-icon-24.png" rel="icon">
+    <link href="css/common.css" type="text/css" rel="stylesheet" />
+    <link href="css/header.css" type="text/css" rel="stylesheet" />
+    <link href="css/body.css" type="text/css" rel="stylesheet" />
+    <link href="css/body-panel-right.css" type="text/css" rel="stylesheet" />
+    <link href="css/body-panel-left.css" type="text/css" rel="stylesheet" />
+    <link href="css/responsive.css" type="text/css" rel="stylesheet" />
+    <link href="css/modal.css" type="text/css" rel="stylesheet" />
+
+</head>
+
+<div id="modal-error" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div id="modal-error-header" class="modal-header">
+                <h5 id="modal-error-title">
+                    <img src="img/ui/warning.svg" height="24px" style="padding-right:8px;">
+                    <span>Alert</span>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="modal-error-body" class="modal-body">
+
+                <p id="modal-error-msg"></p>
+                <p id="modal-error-report">
+                    <div class="m-err-rep">
+                            Possible solution:
+                        <br>(1) Reload the page; 
+                        <br>(2) Update Firefox to latest version; 
+                        <br>(3) If you are using Firefox on an old android device, try desktop instead. 
+                    </div>
+
+                    <div class="m-err-rep">
+                        <br> If you think a bug is causing the error, 
+                        then you may want to send the log file to the developer to help debugging.
+                        <a id="btn-modal-error-log-download" download="error.log" href="">Download log</a>
+                    </div>
+                                        
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+$("#modal-error").modal('show');
+</script>

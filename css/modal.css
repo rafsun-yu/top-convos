@@ -1,0 +1,113 @@
+
+/** Universal */
+.modal-body {
+    max-height: 420px; 
+    overflow-y: auto;
+    overflow-x: hidden; 
+    white-space: normal;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modal-body * {
+    margin: auto;
+}
+
+
+/** Support Modal */
+#modal-support-prompt-body {
+    padding: 48px 24px;
+}
+
+#div-modal-support-prompt-body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#spn-no-thanks {
+    margin-bottom: 4px;
+    font-size: 10px;
+}
+
+#modal-support-prompt-content {
+    background-image: url("../img/ui/heart-texture.png");
+}
+
+#support-heading {
+    margin-bottom: 4px; 
+    color:rgb(68,138,255);
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+}
+
+#support-heading-2 {
+    margin-bottom: 8px;
+    font-size: 24px;
+    text-align: center;
+}
+
+/** Error modal */
+
+#modal-error-header {
+    padding: 0.5rem 1rem;
+    background-color: rgba(255, 221, 0, 0.219);
+}
+
+#modal-error-title {
+    display: flex;
+    flex-direction: row;
+    flex-flow: nowrap;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+#modal-error-body {
+    padding: 0;
+    margin: 16px 32px;
+}
+
+#modal-error-report {
+    text-align: center;
+    padding-top: 16px;
+    color: gray;
+    font-size: 12px;
+}
+
+.m-err-rep {
+    color: gray;
+    font-size: 12px;
+}
+
+/** Iframe */
+.fb-like {
+    border: none;
+    overflow: hidden;
+}
+
+.fb-like#fb-like-panel {
+    margin-right: 2px;
+}
+
+/** Floating Message */
+#floating-msg {
+    display: none;
+    font-size: 10pt;
+    position: fixed;
+    top: 16px;
+    width: 100%;
+    text-align: center;
+    opacity: 0.6;
+}
+
+#floating-msg-text {
+    max-width: 90%;
+    padding: 6px;
+    border-radius: 3px;
+    background: black;
+    color: white;
+}
